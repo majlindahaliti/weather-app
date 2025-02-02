@@ -5,15 +5,19 @@ import { TemperatureImageProps } from "@/interfaces/types/TemperatureImageProps"
 
 const TemperatureImage: FC<TemperatureImageProps> = ({
   style,
-  imgWidth,
-  imgHeight,
+  Icon,
   time,
   condition,
+  topTextStyle,
+  bottomTextStyle,
 }: TemperatureImageProps): JSX.Element => {
   return (
     <View style={[style, { alignItems: "center" }]}>
-      <CloudAndSun />
-      <Text style={styles.title}>{condition}</Text>
+      {time && <Text style={[styles.title, topTextStyle]}>{time}</Text>}
+      {Icon && <Icon />}
+      {condition && (
+        <Text style={[styles.title, bottomTextStyle]}>{condition}</Text>
+      )}
     </View>
   );
 };

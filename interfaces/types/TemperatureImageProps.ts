@@ -4,8 +4,9 @@ import { SvgProps } from "react-native-svg";
 
 export type TemperatureImageProps = {
   style?: ViewStyle;
-  imgWidth?: number;
-  imgHeight?: number;
+  Icon?: FC<SvgProps>;
   time?: string;
   condition?: string;
+  topTextStyle?: TextStyle;
+  bottomTextStyle?: TextStyle;
 };

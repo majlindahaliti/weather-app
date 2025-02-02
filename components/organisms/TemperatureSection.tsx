@@ -9,7 +9,7 @@ const TemperatureSection: FC<Props> = (): JSX.Element => {
   return (
     <View
       style={{
-        marginTop: 20,
+        marginTop: 40,
         flexDirection: "row",
         alignItems: "flex-end",
         justifyContent: "space-between",
@@ -19,7 +19,11 @@ const TemperatureSection: FC<Props> = (): JSX.Element => {
         <Text style={styles.tempStyle}>4°</Text>
         <Text style={styles.regularText}>feels like 2°</Text>
       </View>
-      <TemperatureImage style={{ marginRight: -10 }} condition="Cloudy" />
+      <TemperatureImage
+        style={{ marginRight: -10 }}
+        condition="Cloudy"
+        Icon={CloudAndSun}
+      />
     </View>
   );
 };

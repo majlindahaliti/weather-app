@@ -9,7 +9,7 @@ const CardFooterSection: FC<Props> = (): JSX.Element => {
   return (
     <View
       style={{
-        marginTop: 20,
+        marginTop: 80,
         flexDirection: "row",
         alignItems: "flex-end",
         justifyContent: "space-between",

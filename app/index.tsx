@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { useRouter } from "expo-router";
 import LayoutTemplate from "@/components/templates/LayoutTemplate";
@@ -9,8 +9,10 @@ import Categories from "@/components/molecules/Categories";
 import ConditionCardsGrid from "@/components/organisms/ConditionCardsGrid";
 import HourlyForecastContainer from "@/components/organisms/HourlyForecastContainer";
 import CloudAndSun from "../assets/images/cloud_and_sun.svg";
+import CountriesList from "@/components/organisms/CountriesList";
 
 export default function MainScreen() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("Today");
   const router = useRouter();
 
   const goToCountries = () => {
@@ -27,9 +29,22 @@ export default function MainScreen() {
 
   const bottomContent = (
     <View style={{ margin: 20 }}>
-      <Categories />
-      <ConditionCardsGrid />
-      <HourlyForecastContainer />
+      <Categories
+        selectedCategory={selectedCategory}
+        onPress={(category) => {
+          setSelectedCategory(category);
+        }}
+      />
+      {selectedCategory !== "10 days" ? (
+        <>
+          <ConditionCardsGrid />
+          <HourlyForecastContainer />
+        </>
+      ) : (
+        <View>
+          <CountriesList />
+        </View>
+      )}
     </View>
   );
 

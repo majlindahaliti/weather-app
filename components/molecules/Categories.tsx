@@ -2,14 +2,22 @@ import { FC, useState } from "react";
 import { Chip } from "@rneui/themed";
 import { View, StyleSheet } from "react-native";
 
-interface Props {}
+interface Props {
+  selectedCategory: string;
+  onPress: (category: string) => void;
+}
 
 const categories = ["Today", "Tomorrow", "10 days"];
 
-const Categories: FC<Props> = (): JSX.Element => {
-  const [selectedCategory, setSelectedCategory] = useState<string>(
-    categories[0]
-  );
+const Categories: FC<Props> = ({ onPress, selectedCategory }): JSX.Element => {
+  // const [selectedCategory, setSelectedCategory] = useState<string>(
+  //   categories[0]
+  // );
+
+  const handleCategoryPress = (category: string) => {
+    // setSelectedCategory(category);
+    onPress(category);
+  };
 
   return (
     <View style={styles.container}>
@@ -24,7 +32,7 @@ const Categories: FC<Props> = (): JSX.Element => {
           }}
           containerStyle={styles.chipContainer}
           titleStyle={styles.title}
-          onPress={() => setSelectedCategory(category)}
+          onPress={() => handleCategoryPress(category)}
         />
       ))}
     </View>

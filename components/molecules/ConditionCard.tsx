@@ -6,9 +6,10 @@ import { SvgProps } from "react-native-svg";
 interface Props {
   title: string;
   Icon?: FC<SvgProps>;
+  value?: string;
 }
 
-const ConditionCard: FC<Props> = ({ title, Icon }): JSX.Element => {
+const ConditionCard: FC<Props> = ({ title, Icon, value }): JSX.Element => {
   const { width } = Dimensions.get("window");
   const cardWidth = width / 2 - 30;
   return (
@@ -16,7 +17,7 @@ const ConditionCard: FC<Props> = ({ title, Icon }): JSX.Element => {
       {Icon && <Icon />}
       <View style={{ marginLeft: 10 }}>
         <Text>{title}</Text>
-        <Text style={styles.title}>Value</Text>
+        <Text style={styles.title}>{value}</Text>
       </View>
     </View>
   );

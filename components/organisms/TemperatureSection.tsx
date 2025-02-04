@@ -10,11 +10,12 @@ const TemperatureSection: FC<TemperatureSectionProps> = ({
   tempTextStyle,
   condition,
   Icon,
+  currentTemp,
 }): JSX.Element => {
   return (
     <View style={[styles.container, style]}>
       <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-        <Text style={[styles.tempStyle, tempTextStyle]}>4°</Text>
+        <Text style={[styles.tempStyle, tempTextStyle]}>{currentTemp}</Text>
         <Text style={styles.regularText}>feels like 2°</Text>
       </View>
       <TemperatureImage
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   },
   tempStyle: {
     fontFamily: "Poppins-SemiBold",
-    fontSize: 74,
+    fontSize: 64,
     color: "white",
     marginBottom: -10,
   },
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Regular",
     fontSize: 14,
     color: "white",
-    marginLeft: -20,
+    marginLeft: -10,
   },
 });
 

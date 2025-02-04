@@ -3,15 +3,18 @@ import { Button } from "@rneui/themed";
 import { View, Text, StyleSheet } from "react-native";
 import ListIcon from "../../assets/images/listIcon.svg";
 import BackButon from "../../assets/images/back.svg";
+import { MainResponse } from "@/interfaces/models/MainResponse.models";
 
 interface Props {
   onButtonPress: () => void;
   showBackButton?: Boolean;
+  title?: string;
 }
 
 const CardHeaderSection: FC<Props> = ({
   onButtonPress,
   showBackButton,
+  title,
 }): JSX.Element => {
   return (
     <View style={styles.headerContainer}>
@@ -27,7 +30,7 @@ const CardHeaderSection: FC<Props> = ({
             }}
           />
         )}
-        <Text style={styles.title}>Title goes here</Text>
+        <Text style={styles.title}>{title}</Text>
       </View>
       {!showBackButton && (
         <Button

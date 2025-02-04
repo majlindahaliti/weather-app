@@ -3,9 +3,17 @@ import { Button } from "@rneui/themed";
 import { View, Text, StyleSheet } from "react-native";
 import ListIcon from "../../assets/images/listIcon.svg";
 
-interface Props {}
+interface Props {
+  minTemp?: string;
+  maxTemp?: string;
+  dateTime?: string;
+}
 
-const CardFooterSection: FC<Props> = (): JSX.Element => {
+const CardFooterSection: FC<Props> = ({
+  minTemp,
+  maxTemp,
+  dateTime,
+}): JSX.Element => {
   return (
     <View
       style={{
@@ -15,12 +23,12 @@ const CardFooterSection: FC<Props> = (): JSX.Element => {
         justifyContent: "space-between",
       }}
     >
-      <Text style={[styles.regularText, { fontSize: 16 }]}>
-        January, 18 16:44
-      </Text>
+      <Text style={[styles.regularText, { fontSize: 16 }]}>{dateTime}</Text>
       <View>
-        <Text style={[styles.tempStyle, { fontSize: 16 }]}>Day 2°</Text>
-        <Text style={[styles.tempStyle, { fontSize: 16 }]}>Night -2°</Text>
+        <Text style={[styles.tempStyle, { fontSize: 16 }]}>Day {maxTemp}</Text>
+        <Text style={[styles.tempStyle, { fontSize: 16 }]}>
+          Night {minTemp}
+        </Text>
       </View>
     </View>
   );

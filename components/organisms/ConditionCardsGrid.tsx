@@ -1,18 +1,35 @@
 import { FC } from "react";
-import { View, FlatList, StyleSheet, Dimensions } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import ConditionCard from "@/components/molecules/ConditionCard";
 import { conditionsList } from "@/config/data";
+import { WetherConditionsProps } from "@/interfaces/types/WeatherConditionsProps";
 
-interface Props {}
-
-const ConditionList: FC<Props> = (): JSX.Element => {
-  const { width } = Dimensions.get("window");
+const ConditionList: FC<WetherConditionsProps> = ({
+  windSpeed,
+  rainChance,
+  pressure,
+  UVIndex,
+}): JSX.Element => {
+  const updatedConditionsList = conditionsList.map((condition) => {
+    switch (condition.title) {
+      case "Wind Speed":
+        return { ...condition, value: `${windSpeed} km/h` };
+      case "Rain Chance":
+        return { ...condition, value: `${rainChance} mm` };
+      case "Pressure":
+        return { ...condition, value: `${pressure} hPa` };
+      case "UV Index":
+        return { ...condition, value: `${UVIndex}` };
+      default:
+        return condition;
+    }
+  });
 
   return (
     <FlatList
-      data={conditionsList}
+      data={updatedConditionsList}
       renderItem={({ item }) => (
-        <ConditionCard title={item.title} Icon={item.icon} />
+        <ConditionCard title={item.title} Icon={item.icon} value={item.value} />
       )}
       keyExtractor={(item) => item.id.toString()}
       numColumns={2}

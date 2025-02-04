@@ -7,4 +7,5 @@ export type TemperatureSectionProps = {
   tempTextStyle?: TextStyle;
   condition?: string;
   Icon?: FC<SvgProps>;
+  currentTemp?: string;
 };

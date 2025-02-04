@@ -2,10 +2,17 @@ import { FC } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HourlyIcon from "../../assets/images/hourlIcon.svg";
 import HourlyForecastFlatList from "./HourlyForecastFlatList";
+import { Hourly } from "@/interfaces/models/MainResponse.models";
 
-interface Props {}
+interface Props {
+  hourlyResponse?: Hourly;
+  isTomorrow: boolean;
+}
 
-const HourlyForecastContainer: FC<Props> = (): JSX.Element => {
+const HourlyForecastContainer: FC<Props> = ({
+  hourlyResponse,
+  isTomorrow,
+}): JSX.Element => {
   return (
     <View style={styles.container}>
       <View
@@ -14,7 +21,10 @@ const HourlyForecastContainer: FC<Props> = (): JSX.Element => {
         <HourlyIcon />
         <Text style={styles.title}>Hourly Forecast</Text>
       </View>
-      <HourlyForecastFlatList />
+      <HourlyForecastFlatList
+        hourlyResponse={hourlyResponse}
+        isTomorrow={isTomorrow}
+      />
     </View>
   );
 };

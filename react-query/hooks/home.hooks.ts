@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { fetchMainData } from "../queries/home.queries";
 
 export const useFetchMainDataQuery = (
   latitude: number,

@@ -11,8 +11,10 @@ export const fetchMainData = async (
       latitude,
       longitude,
       daily:
-        "temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max",
+        "temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,pressure_msl_max,uv_index_max",
+      hourly: "temperature_2m",
       timezone,
+      current_weather: true,
     },
   });
   return data;

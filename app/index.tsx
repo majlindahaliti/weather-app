@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { useRouter } from "expo-router";
 import LayoutTemplate from "@/components/templates/LayoutTemplate";
@@ -10,10 +10,23 @@ import ConditionCardsGrid from "@/components/organisms/ConditionCardsGrid";
 import HourlyForecastContainer from "@/components/organisms/HourlyForecastContainer";
 import CloudAndSun from "../assets/images/cloud_and_sun.svg";
 import CountriesList from "@/components/organisms/CountriesList";
+import { useFetchMainDataQuery } from "@/react-query/hooks/home.hooks";
 
 export default function MainScreen() {
   const [selectedCategory, setSelectedCategory] = useState<string>("Today");
   const router = useRouter();
+
+  const latitude = 51.5074; // Example latitude for London
+  const longitude = -0.1278; // Example longitude for London
+  const timezone = "Europe/London"; // Example timezone
+
+  // const { data, error, isLoading } = useFetchMainDataQuery(
+  //   latitude,
+  //   longitude,
+  //   timezone
+  // );
+
+  // console.log("returned data", data);
 
   const goToCountries = () => {
     router.push("/countries");

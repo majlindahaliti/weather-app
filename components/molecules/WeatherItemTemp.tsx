@@ -6,14 +6,20 @@ import { Divider } from "@rneui/themed";
 
 interface Props {
   Icon?: FC<SvgProps>;
+  minTemp: string;
+  maxTemp: string;
 }
 
-const CountryWeatherCondition: FC<Props> = ({ Icon }): JSX.Element => {
+const WeatherItemTemp: FC<Props> = ({
+  Icon,
+  minTemp,
+  maxTemp,
+}): JSX.Element => {
   return (
     <View style={styles.container}>
       <View style={styles.tempTextContainer}>
-        <Text style={styles.title}>1°</Text>
-        <Text style={styles.title}>2°</Text>
+        <Text style={styles.title}>{minTemp}</Text>
+        <Text style={styles.title}>{maxTemp}</Text>
       </View>
       <Divider
         orientation="vertical"
@@ -42,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CountryWeatherCondition;
+export default WeatherItemTemp;

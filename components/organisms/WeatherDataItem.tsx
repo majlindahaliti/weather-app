@@ -1,21 +1,32 @@
 import { FC } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { SvgProps } from "react-native-svg";
-import CountryWeatherCondition from "../molecules/CountryWeatherCondition";
+import WeatherItemTemp from "../molecules/WeatherItemTemp";
 
 interface Props {
   title: string;
+  subtitle: string;
   Icon?: FC<SvgProps>;
+  minTemp: string;
+  maxTemp: string;
 }
 
-const CountryItem: FC<Props> = ({ title, Icon }): JSX.Element => {
+const WeatherDataItem: FC<Props> = ({
+  title,
+  Icon,
+  subtitle,
+  minTemp,
+  maxTemp,
+}): JSX.Element => {
   return (
     <View style={[styles.container, { width: "100%" }]}>
       <View style={{ marginLeft: 10 }}>
-        <Text>{title}</Text>
-        <Text style={styles.title}>Value</Text>
+        <Text style={[styles.title, { fontFamily: "Poppins-SemiBold" }]}>
+          {title}
+        </Text>
+        <Text style={styles.title}>{subtitle}</Text>
       </View>
-      <CountryWeatherCondition />
+      <WeatherItemTemp minTemp={minTemp} maxTemp={maxTemp} />
     </View>
   );
 };
@@ -38,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CountryItem;
+export default WeatherDataItem;

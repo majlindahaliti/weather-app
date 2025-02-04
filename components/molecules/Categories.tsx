@@ -7,7 +7,7 @@ interface Props {
   onPress: (category: string) => void;
 }
 
-const categories = ["Today", "Tomorrow", "10 days"];
+const categories = ["Today", "Tomorrow", "7 days"];
 
 const Categories: FC<Props> = ({ onPress, selectedCategory }): JSX.Element => {
   // const [selectedCategory, setSelectedCategory] = useState<string>(

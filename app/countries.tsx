@@ -5,7 +5,7 @@ import CardHeaderSection from "@/components/molecules/CardHeaderSection";
 import CustomSearchComponent from "@/components/molecules/CustomSearchBar";
 import TemperatureSection from "@/components/organisms/TemperatureSection";
 import CloudAndSun from "../assets/images/cloud_and_sun.svg";
-import CountriesList from "@/components/organisms/CountriesList";
+import WeatherDataList from "@/components/organisms/WeatherDataList";
 
 export default function CountriesScreen() {
   const router = useRouter();
@@ -28,7 +28,7 @@ export default function CountriesScreen() {
 
   const bottomContent = (
     <View style={{ marginHorizontal: 20 }}>
-      <CountriesList />
+      <WeatherDataList isDays={false} />
     </View>
   );
 

@@ -34,7 +34,9 @@ const ConditionList: FC<WetherConditionsProps> = ({
       keyExtractor={(item) => item.id.toString()}
       numColumns={2}
       columnWrapperStyle={styles.columnWrapperStyle}
-      contentContainerStyle={{ marginTop: 20 }}
+      contentContainerStyle={{
+        marginTop: 20,
+      }}
     />
   );
 };

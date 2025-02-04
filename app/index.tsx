@@ -9,7 +9,7 @@ import Categories from "@/components/molecules/Categories";
 import ConditionCardsGrid from "@/components/organisms/ConditionCardsGrid";
 import HourlyForecastContainer from "@/components/organisms/HourlyForecastContainer";
 import CloudAndSun from "../assets/images/cloud_and_sun.svg";
-import CountriesList from "@/components/organisms/CountriesList";
+import WeatherDataList from "@/components/organisms/WeatherDataList";
 import { useFetchMainDataQuery } from "@/react-query/hooks/home.hooks";
 import Moment from "moment";
 import { getWeatherCondition } from "@/config/weatherConditions";
@@ -76,7 +76,7 @@ export default function MainScreen() {
   );
 
   const bottomContent = (
-    <View style={{ margin: 20 }}>
+    <View style={{ flex: 1, margin: 20 }}>
       <Categories
         selectedCategory={selectedCategory}
         onPress={(category) => {
@@ -84,7 +84,7 @@ export default function MainScreen() {
         }}
       />
       {selectedCategory === "Today" ? (
-        <>
+        <View>
           <ConditionCardsGrid
             windSpeed={windSpeed[0] ?? 0}
             rainChance={precipitation[0] ?? 0}
@@ -95,9 +95,9 @@ export default function MainScreen() {
             hourlyResponse={data?.hourly}
             isTomorrow={false}
           />
-        </>
+        </View>
       ) : selectedCategory === "Tomorrow" ? (
-        <>
+        <View>
           <ConditionCardsGrid
             windSpeed={windSpeed[1] ?? 0}
             rainChance={precipitation[1] ?? 0}
@@ -108,11 +108,9 @@ export default function MainScreen() {
             hourlyResponse={data?.hourly}
             isTomorrow={true}
           />
-        </>
-      ) : (
-        <View>
-          <CountriesList />
         </View>
+      ) : (
+        <WeatherDataList isDays={true} dailyResponse={data?.daily} />
       )}
     </View>
   );

@@ -13,10 +13,15 @@ import WeatherDataList from "@/components/organisms/WeatherDataList";
 import { useFetchMainDataQuery } from "@/react-query/hooks/home.hooks";
 import Moment from "moment";
 import { getWeatherCondition } from "@/config/weatherConditions";
+import { useCurrentWeatherData } from "@/store/currentWeatherData.store";
 
 export default function MainScreen() {
   const [selectedCategory, setSelectedCategory] = useState<string>("Today");
   const router = useRouter();
+
+  //store
+  const { setTitle, setCurrentTemp, setCurrentCondition } =
+    useCurrentWeatherData();
 
   const latitude = 51.5074;
   const longitude = -0.1278;
@@ -57,6 +62,15 @@ export default function MainScreen() {
   const precipitation: number[] = data?.daily.precipitation_sum ?? [];
   const pressure: number[] = data?.daily.pressure_msl_max ?? [];
   const uvIndex: number[] = data?.daily.uv_index_max ?? [];
+
+  //useEffects
+  useEffect(() => {
+    if (data) {
+      setTitle(data.timezone);
+      setCurrentTemp(currentTemp);
+      setCurrentCondition(currentWeatherCondition);
+    }
+  }, [data, setTitle, setCurrentTemp, setCurrentCondition]);
 
   const topContent = (
     <View style={styles.contentContainer}>

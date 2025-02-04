@@ -6,9 +6,12 @@ import CustomSearchComponent from "@/components/molecules/CustomSearchBar";
 import TemperatureSection from "@/components/organisms/TemperatureSection";
 import CloudAndSun from "../assets/images/cloud_and_sun.svg";
 import WeatherDataList from "@/components/organisms/WeatherDataList";
+import { useCurrentWeatherData } from "@/store/currentWeatherData.store";
 
 export default function CountriesScreen() {
   const router = useRouter();
+  //store
+  const { title, currentTemp, currentCondition } = useCurrentWeatherData();
 
   const goBack = () => {
     router.back();
@@ -16,9 +19,14 @@ export default function CountriesScreen() {
 
   const topContent = (
     <View style={styles.contentContainer}>
-      <CardHeaderSection onButtonPress={goBack} showBackButton={true} />
+      <CardHeaderSection
+        onButtonPress={goBack}
+        showBackButton={true}
+        title={title}
+      />
       <CustomSearchComponent />
       <TemperatureSection
+        currentTemp={currentTemp}
         style={{ marginTop: 10 }}
         tempTextStyle={{ fontSize: 60 }}
         Icon={() => <CloudAndSun width={70} height={70} />}

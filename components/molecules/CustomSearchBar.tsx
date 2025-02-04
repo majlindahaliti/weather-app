@@ -2,22 +2,19 @@ import React, { useState } from "react";
 import { SearchBar } from "@rneui/themed";
 import { View, Text, StyleSheet } from "react-native";
 
-type SearchBarComponentProps = {};
+type SearchBarComponentProps = {
+  search: string;
+  setSearch: (search: string) => void;
+};
 
 const CustomSearchComponent: React.FunctionComponent<
   SearchBarComponentProps
-> = () => {
-  const [search, setSearch] = useState("");
-
-  const updateSearch = (search: string) => {
-    setSearch(search);
-  };
-
+> = ({ search, setSearch }) => {
   return (
     <View style={styles.view}>
       <SearchBar
         placeholder="Search location..."
-        onChangeText={updateSearch}
+        onChangeText={setSearch}
         value={search}
         inputContainerStyle={{
           backgroundColor: "transparent",

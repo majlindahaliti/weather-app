@@ -37,8 +37,6 @@ export default function MainScreen() {
     router.push("/countries");
   };
 
-  console.log("returned data", data);
-
   // Bottom part values
   const currentTemp = `${Math.round(data?.current_weather.temperature ?? 0)} ${
     data?.current_weather_units.temperature

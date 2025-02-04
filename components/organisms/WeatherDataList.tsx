@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { View, FlatList, StyleSheet, Dimensions } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import WeatherDataItem from "./WeatherDataItem";
 import { Daily } from "@/interfaces/models/MainResponse.models";
 import Moment from "moment";

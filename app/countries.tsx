@@ -5,13 +5,33 @@ import CardHeaderSection from "@/components/molecules/CardHeaderSection";
 import CustomSearchComponent from "@/components/molecules/CustomSearchBar";
 import TemperatureSection from "@/components/organisms/TemperatureSection";
 import CloudAndSun from "../assets/images/cloud_and_sun.svg";
-import WeatherDataList from "@/components/organisms/WeatherDataList";
 import { useCurrentWeatherData } from "@/store/currentWeatherData.store";
+import CititesList from "@/components/organisms/CititesList";
+import { useEffect, useState } from "react";
 
 export default function CountriesScreen() {
   const router = useRouter();
+  const [citiesData, setCitiesData] = useState<any[]>([]);
+  const [search, setSearch] = useState("");
   //store
-  const { title, currentTemp, currentCondition } = useCurrentWeatherData();
+  const { title, currentTemp } = useCurrentWeatherData();
+
+  useEffect(() => {
+    const fetchCitiesData = async () => {
+      try {
+        const cities = require("../assets/topCities.json");
+        setCitiesData(cities);
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    };
+    fetchCitiesData();
+  }, []);
+
+  //functions
+  const filteredCities = citiesData.filter((city) =>
+    city.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   const goBack = () => {
     router.back();
@@ -24,7 +44,7 @@ export default function CountriesScreen() {
         showBackButton={true}
         title={title}
       />
-      <CustomSearchComponent />
+      <CustomSearchComponent search={search} setSearch={setSearch} />
       <TemperatureSection
         currentTemp={currentTemp}
         style={{ marginTop: 10 }}
@@ -35,8 +55,8 @@ export default function CountriesScreen() {
   );
 
   const bottomContent = (
-    <View style={{ marginHorizontal: 20 }}>
-      <WeatherDataList isDays={false} />
+    <View style={{ marginHorizontal: 20, flex: 1 }}>
+      <CititesList cities={filteredCities} />
     </View>
   );
 

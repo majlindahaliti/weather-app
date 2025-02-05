@@ -92,4 +92,6 @@ To check if it's installed, run:
 
 ## Final implementation
 
-![video](documentation-assets/app-video.mov)
+
+https://github.com/user-attachments/assets/ff8fc28c-b3c7-4c71-b3df-2b7e3edce11c
+

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     position: "relative",
     width: "100%",
-    height: "48%",
+    height: "45%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

@@ -59,7 +59,6 @@ export default function CountriesScreen() {
       <CustomSearchComponent search={search} setSearch={setSearch} />
       <TemperatureSection
         currentTemp={currentTemp}
-        style={{ marginTop: 10 }}
         tempTextStyle={{ fontSize: 60 }}
         Icon={() => <CloudAndSun width={70} height={70} />}
       />
@@ -91,11 +90,14 @@ export default function CountriesScreen() {
 const styles = StyleSheet.create({
   contentContainer: {
     position: "absolute",
-    top: 65,
-    left: 20,
-    right: 20,
     zIndex: 1,
-    paddingTop: 10,
+    paddingTop: 65,
+    paddingBottom: 15,
+    paddingHorizontal: 20,
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%",
+    width: "100%",
   },
   animation: {
     width: 120,

@@ -1,7 +1,5 @@
 import { FC } from "react";
-import { Button } from "@rneui/themed";
 import { View, Text, StyleSheet } from "react-native";
-import ListIcon from "../../assets/images/listIcon.svg";
 
 interface Props {
   minTemp?: string;
@@ -17,7 +15,6 @@ const CardFooterSection: FC<Props> = ({
   return (
     <View
       style={{
-        marginTop: 80,
         flexDirection: "row",
         alignItems: "flex-end",
         justifyContent: "space-between",

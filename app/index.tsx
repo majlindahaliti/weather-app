@@ -106,7 +106,6 @@ export default function MainScreen() {
         onBackButtonPress={goBack}
       />
       <TemperatureSection
-        style={{ marginTop: 40 }}
         Icon={CloudAndSun}
         currentTemp={currentTemp}
         condition={currentWeatherCondition}
@@ -168,7 +167,11 @@ const styles = StyleSheet.create({
   contentContainer: {
     position: "absolute",
     zIndex: 1,
-    marginTop: 65,
+    paddingTop: 65,
+    paddingBottom: 20,
     marginHorizontal: 20,
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%",
   },
 });

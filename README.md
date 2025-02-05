@@ -89,3 +89,7 @@ To check if it's installed, run:
 
 - `npx expo start`
   to start the app
+
+## Final implementation
+
+![video](documentation-assets/app-video.mov)

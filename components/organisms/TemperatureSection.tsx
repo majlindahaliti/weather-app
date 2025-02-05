@@ -1,8 +1,6 @@
 import { FC } from "react";
-import { View, Text, StyleSheet, ViewStyle, TextStyle } from "react-native";
-import CloudAndSun from "../../assets/images/cloud_and_sun.svg";
+import { View, Text, StyleSheet } from "react-native";
 import TemperatureImage from "../molecules/TemperatureImage";
-import { SvgProps } from "react-native-svg";
 import { TemperatureSectionProps } from "@/interfaces/types/TemperatureSectionProps";
 
 const TemperatureSection: FC<TemperatureSectionProps> = ({

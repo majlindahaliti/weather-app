@@ -1,17 +1,26 @@
 import { FC } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import RightArrow from "../../assets/images/rightArrow.svg";
 
 interface Props {
   cityName: string;
+  onPress: () => void;
 }
 
-const CityItem: FC<Props> = ({ cityName }): JSX.Element => {
+const CityItem: FC<Props> = ({ cityName, onPress }): JSX.Element => {
   return (
-    <View style={[styles.container, { width: "100%" }]}>
-      <Text style={styles.title}>{cityName}</Text>
-      <RightArrow />
-    </View>
+    <TouchableOpacity onPress={onPress}>
+      <View style={[styles.container, { width: "100%" }]}>
+        <Text style={styles.title}>{cityName}</Text>
+        <RightArrow />
+      </View>
+    </TouchableOpacity>
   );
 };
 

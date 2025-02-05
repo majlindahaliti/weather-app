@@ -1,4 +1,4 @@
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import LayoutTemplate from "@/components/templates/LayoutTemplate";
 import CardHeaderSection from "@/components/molecules/CardHeaderSection";
@@ -6,8 +6,9 @@ import CustomSearchComponent from "@/components/molecules/CustomSearchBar";
 import TemperatureSection from "@/components/organisms/TemperatureSection";
 import CloudAndSun from "../assets/images/cloud_and_sun.svg";
 import { useCurrentWeatherData } from "@/store/currentWeatherData.store";
-import CititesList from "@/components/organisms/CititesList";
 import { useEffect, useState } from "react";
+import EmptyDataView from "@/components/templates/EmptyView";
+import CititesList from "@/components/organisms/CititesList";
 
 export default function CountriesScreen() {
   const router = useRouter();
@@ -36,7 +37,9 @@ export default function CountriesScreen() {
   const goBack = () => {
     router.back();
   };
-
+  const showMainScreen = (long: number, lat: number) => {
+    router.push(`/?longitude=${long}&latitude=${lat}`);
+  };
   const topContent = (
     <View style={styles.contentContainer}>
       <CardHeaderSection
@@ -56,7 +59,14 @@ export default function CountriesScreen() {
 
   const bottomContent = (
     <View style={{ marginHorizontal: 20, flex: 1 }}>
-      <CititesList cities={filteredCities} />
+      {filteredCities.length != 0 ? (
+        <CititesList
+          cities={filteredCities}
+          onPress={(long, lat) => showMainScreen(long, lat)}
+        />
+      ) : (
+        <EmptyDataView />
+      )}
     </View>
   );
 
@@ -77,5 +87,10 @@ const styles = StyleSheet.create({
     right: 20,
     zIndex: 1,
     paddingTop: 10,
+  },
+  animation: {
+    width: 120,
+    height: 120,
+    // backgroundColor: "red",
   },
 });

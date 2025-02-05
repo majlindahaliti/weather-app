@@ -5,14 +5,20 @@ import { conditionsList } from "@/config/data";
 
 interface Props {
   cities: any;
+  onPress: (longitude: number, latitude: number) => void;
 }
 
-const CititesList: FC<Props> = ({ cities }): JSX.Element => {
+const CititesList: FC<Props> = ({ cities, onPress }): JSX.Element => {
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
       data={cities}
-      renderItem={({ item }) => <CityItem cityName={item.name} />}
+      renderItem={({ item }) => (
+        <CityItem
+          cityName={item.name}
+          onPress={() => onPress(item.longitude, item.latitude)}
+        />
+      )}
       keyExtractor={(item) => item.name}
       contentContainerStyle={{ marginTop: 20 }}
     />

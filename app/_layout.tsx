@@ -10,6 +10,8 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import Loader from "@/components/templates/Loader";
+import { useLoaderStore } from "@/store/loader.store";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,6 +21,8 @@ const queryClient = new QueryClient({
 });
 
 export default function RootLayout() {
+  const showLoader = useLoaderStore((state) => state.isLoading);
+
   const [loaded] = useFonts({
     PoppinsRegular: require("../assets/fonts/Poppins-Regular.ttf"),
     PoppinsSemiBold: require("../assets/fonts/Poppins-SemiBold.ttf"),
@@ -41,7 +45,8 @@ export default function RootLayout() {
         <Stack.Screen name="index" />
         <Stack.Screen name="countries" />
       </Stack>
-      <StatusBar style="auto" />
+      {showLoader && <Loader />}
+      <StatusBar style="light" />
     </QueryClientProvider>
   );
 }

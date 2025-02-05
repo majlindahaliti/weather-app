@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import LayoutTemplate from "@/components/templates/LayoutTemplate";
 import CardHeaderSection from "@/components/molecules/CardHeaderSection";
@@ -14,17 +14,22 @@ import { useFetchMainDataQuery } from "@/react-query/hooks/home.hooks";
 import Moment from "moment";
 import { getWeatherCondition } from "@/config/weatherConditions";
 import { useCurrentWeatherData } from "@/store/currentWeatherData.store";
+import { useLocalSearchParams } from "expo-router";
+import { useLoaderStore } from "@/store/loader.store";
 
 export default function MainScreen() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("Today");
   const router = useRouter();
+  const { longitude: long, latitude: lat } = useLocalSearchParams();
+
+  //state
+  const [latitude, setLatitude] = useState<number>(51.5074);
+  const [longitude, setLongitude] = useState<number>(-0.1278);
+  const [selectedCategory, setSelectedCategory] = useState<string>("Today");
 
   //store
-  const { setTitle, setCurrentTemp, setCurrentCondition } =
-    useCurrentWeatherData();
+  const { setTitle, setCurrentTemp } = useCurrentWeatherData();
+  const { setIsLoading } = useLoaderStore();
 
-  const latitude = 51.5074;
-  const longitude = -0.1278;
   const timezone = "Europe/London";
 
   const { data, error, isLoading } = useFetchMainDataQuery(
@@ -38,9 +43,12 @@ export default function MainScreen() {
   };
 
   // Bottom part values
-  const currentTemp = `${Math.round(data?.current_weather.temperature ?? 0)} ${
-    data?.current_weather_units.temperature
-  }`;
+  const currentTemp = data?.current_weather?.temperature
+    ? `${Math.round(data.current_weather.temperature)} ${
+        data.current_weather_units?.temperature ?? ""
+      }`
+    : "";
+
   const currentMinTemp = `${Math.round(
     data?.daily.temperature_2m_min[0] ?? 0
   )} ${data?.daily_units.temperature_2m_min}`;
@@ -66,9 +74,14 @@ export default function MainScreen() {
     if (data) {
       setTitle(data.timezone);
       setCurrentTemp(currentTemp);
-      setCurrentCondition(currentWeatherCondition);
     }
-  }, [data, setTitle, setCurrentTemp, setCurrentCondition]);
+    setIsLoading(isLoading);
+  }, [data, isLoading, setTitle, setCurrentTemp, setIsLoading]);
+
+  useEffect(() => {
+    setLongitude(parseFloat(Array.isArray(long) ? long[0] : long ?? "0"));
+    setLatitude(parseFloat(Array.isArray(lat) ? lat[0] : lat ?? "0"));
+  }, [long, lat]);
 
   const topContent = (
     <View style={styles.contentContainer}>

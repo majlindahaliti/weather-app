@@ -16,7 +16,7 @@ The application interacts with a public weather API Open-Meteo(https://open-mete
 
 The app’s UI/UX design was created by me using Figma. The layout is clean and intuitive, with a focus on usability and aesthetics. Below there is a screenshot showing the design.
 
-![screenshot](/Users/majlinda/Desktop/final-UI.png)
+![screenshot](documentation-assets/weather-app-UI.png)
 
 ## Github Flow
 

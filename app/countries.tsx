@@ -9,14 +9,19 @@ import { useCurrentWeatherData } from "@/store/currentWeatherData.store";
 import { useEffect, useState } from "react";
 import EmptyDataView from "@/components/templates/EmptyView";
 import CititesList from "@/components/organisms/CititesList";
+import { CityData } from "@/interfaces/models/CityData.models";
 
 export default function CountriesScreen() {
   const router = useRouter();
+
+  //state
   const [citiesData, setCitiesData] = useState<any[]>([]);
   const [search, setSearch] = useState("");
+
   //store
   const { title, currentTemp } = useCurrentWeatherData();
 
+  //useEffects
   useEffect(() => {
     const fetchCitiesData = async () => {
       try {
@@ -37,13 +42,16 @@ export default function CountriesScreen() {
   const goBack = () => {
     router.back();
   };
-  const showMainScreen = (long: number, lat: number) => {
-    router.push(`/?longitude=${long}&latitude=${lat}`);
+
+  const showMainScreen = (city: CityData) => {
+    router.push(`/?longitude=${city.longitude}&latitude=${city.latitude}`);
   };
+
+  //content
   const topContent = (
     <View style={styles.contentContainer}>
       <CardHeaderSection
-        onButtonPress={goBack}
+        onBackButtonPress={goBack}
         showBackButton={true}
         title={title}
       />
@@ -62,7 +70,7 @@ export default function CountriesScreen() {
       {filteredCities.length != 0 ? (
         <CititesList
           cities={filteredCities}
-          onPress={(long, lat) => showMainScreen(long, lat)}
+          onPress={(city) => showMainScreen(city)}
         />
       ) : (
         <EmptyDataView />
@@ -72,7 +80,7 @@ export default function CountriesScreen() {
 
   return (
     <LayoutTemplate
-      imageStyle={{ height: "33%" }}
+      imageStyle={{ height: "35%" }}
       topContent={topContent}
       bottomContent={bottomContent}
     />
@@ -91,6 +99,5 @@ const styles = StyleSheet.create({
   animation: {
     width: 120,
     height: 120,
-    // backgroundColor: "red",
   },
 });

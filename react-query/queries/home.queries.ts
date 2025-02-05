@@ -3,8 +3,7 @@ import { MainResponse } from "@/interfaces/models/MainResponse.models";
 
 export const fetchMainData = async (
   latitude: number,
-  longitude: number,
-  timezone: string
+  longitude: number
 ): Promise<MainResponse> => {
   const { data } = await axios.get("/", {
     params: {

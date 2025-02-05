@@ -3,16 +3,17 @@ import { Button } from "@rneui/themed";
 import { View, Text, StyleSheet } from "react-native";
 import ListIcon from "../../assets/images/listIcon.svg";
 import BackButon from "../../assets/images/back.svg";
-import { MainResponse } from "@/interfaces/models/MainResponse.models";
 
 interface Props {
-  onButtonPress: () => void;
+  onButtonPress?: () => void;
+  onBackButtonPress: () => void;
   showBackButton?: Boolean;
   title?: string;
 }
 
 const CardHeaderSection: FC<Props> = ({
   onButtonPress,
+  onBackButtonPress,
   showBackButton,
   title,
 }): JSX.Element => {
@@ -21,7 +22,7 @@ const CardHeaderSection: FC<Props> = ({
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         {showBackButton && (
           <Button
-            onPress={onButtonPress}
+            onPress={onBackButtonPress}
             icon={<BackButon />}
             buttonStyle={{
               width: 40,

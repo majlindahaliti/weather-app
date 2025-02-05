@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import LayoutTemplate from "@/components/templates/LayoutTemplate";
 import CardHeaderSection from "@/components/molecules/CardHeaderSection";
 import TemperatureSection from "@/components/organisms/TemperatureSection";
@@ -25,24 +25,23 @@ export default function MainScreen() {
   const [latitude, setLatitude] = useState<number>(51.5074);
   const [longitude, setLongitude] = useState<number>(-0.1278);
   const [selectedCategory, setSelectedCategory] = useState<string>("Today");
+  const [canGoBack, setCanGoBack] = useState(false);
 
   //store
   const { setTitle, setCurrentTemp } = useCurrentWeatherData();
   const { setIsLoading } = useLoaderStore();
 
-  const timezone = "Europe/London";
-
-  const { data, error, isLoading } = useFetchMainDataQuery(
-    latitude,
-    longitude,
-    timezone
-  );
+  const { data, error, isLoading } = useFetchMainDataQuery(latitude, longitude);
 
   const goToCountries = () => {
     router.push("/countries");
   };
 
-  // Bottom part values
+  const goBack = () => {
+    router.back();
+  };
+
+  // Top part values
   const currentTemp = data?.current_weather?.temperature
     ? `${Math.round(data.current_weather.temperature)} ${
         data.current_weather_units?.temperature ?? ""
@@ -83,9 +82,24 @@ export default function MainScreen() {
     setLatitude(parseFloat(Array.isArray(lat) ? lat[0] : lat ?? "0"));
   }, [long, lat]);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      setCanGoBack(router.canGoBack());
+
+      return () => {
+        setCanGoBack(false);
+      };
+    }, [router])
+  );
+
   const topContent = (
     <View style={styles.contentContainer}>
-      <CardHeaderSection title={data?.timezone} onButtonPress={goToCountries} />
+      <CardHeaderSection
+        title={data?.timezone}
+        onButtonPress={goToCountries}
+        showBackButton={canGoBack}
+        onBackButtonPress={goBack}
+      />
       <TemperatureSection
         style={{ marginTop: 40 }}
         Icon={CloudAndSun}

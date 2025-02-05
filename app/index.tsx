@@ -19,11 +19,12 @@ import { useLoaderStore } from "@/store/loader.store";
 
 export default function MainScreen() {
   const router = useRouter();
-  const { longitude: long, latitude: lat } = useLocalSearchParams();
+  const { city } = useLocalSearchParams();
+  const parsedCity = city
+    ? JSON.parse(decodeURIComponent(city as string))
+    : null;
 
-  //state
-  const [latitude, setLatitude] = useState<number>(51.5074);
-  const [longitude, setLongitude] = useState<number>(-0.1278);
+  const [cityData, setCityData] = useState();
   const [selectedCategory, setSelectedCategory] = useState<string>("Today");
   const [canGoBack, setCanGoBack] = useState(false);
 
@@ -31,7 +32,10 @@ export default function MainScreen() {
   const { setTitle, setCurrentTemp } = useCurrentWeatherData();
   const { setIsLoading } = useLoaderStore();
 
-  const { data, error, isLoading } = useFetchMainDataQuery(latitude, longitude);
+  const { data, error, isLoading } = useFetchMainDataQuery(
+    parsedCity?.latitude ?? 51.5074,
+    parsedCity?.longitude ?? -0.1278
+  );
 
   const goToCountries = () => {
     router.push("/countries");
@@ -78,9 +82,10 @@ export default function MainScreen() {
   }, [data, isLoading, setTitle, setCurrentTemp, setIsLoading]);
 
   useEffect(() => {
-    setLongitude(parseFloat(Array.isArray(long) ? long[0] : long ?? "0"));
-    setLatitude(parseFloat(Array.isArray(lat) ? lat[0] : lat ?? "0"));
-  }, [long, lat]);
+    if (parsedCity) {
+      setCityData(cityData);
+    }
+  }, [parsedCity]);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -95,7 +100,7 @@ export default function MainScreen() {
   const topContent = (
     <View style={styles.contentContainer}>
       <CardHeaderSection
-        title={data?.timezone}
+        title={parsedCity?.name ?? data?.timezone}
         onButtonPress={goToCountries}
         showBackButton={canGoBack}
         onBackButtonPress={goBack}

@@ -44,7 +44,8 @@ export default function CountriesScreen() {
   };
 
   const showMainScreen = (city: CityData) => {
-    router.push(`/?longitude=${city.longitude}&latitude=${city.latitude}`);
+    const cityString = JSON.stringify(city);
+    router.push(`/?city=${encodeURIComponent(cityString)}`);
   };
 
   //content

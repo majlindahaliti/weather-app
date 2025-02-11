@@ -1,4 +1,4 @@
-# Dawraty Education Group - Assignment
+# Weather App
 
 ## Overview
 
